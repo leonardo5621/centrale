@@ -32,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.background.paper,
       padding: theme.spacing(6),
     },
+    title: {
+      flexGrow: 1,
+    },
   }));
 
   export default useStyles;

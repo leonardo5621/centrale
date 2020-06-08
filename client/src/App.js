@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import PokemonDisplayer from "./components/PokemonDisplayer";
 import HomePage from "./components/HomePage";
 import SignIn from "./components/Connection";
+import MoviesList from './components/moviesList';
 
 function App() {
   return (
@@ -29,6 +30,9 @@ function App() {
           </Route>
           <Route path="/connection">
             <SignIn />
+          </Route>
+          <Route path="/movieList">
+              <MoviesList />
           </Route>
         </Switch>
       </div>
