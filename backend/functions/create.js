@@ -1,6 +1,6 @@
 const uuid = require('uuid');
 const DynamoDB = require('aws-sdk/clients/dynamodb');
-
+const name  = 'test' ;
 module.exports.handle = async event => {
     const data = JSON.parse(event.body);
 
