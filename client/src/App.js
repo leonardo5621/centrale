@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import PokemonDisplayer from "./components/PokemonDisplayer";
 import HomePage from "./components/HomePage";
+import SignIn from "./components/Connection";
 
 function App() {
   return (
@@ -20,11 +21,14 @@ function App() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/demo">
+          <Route  path="/demo">
             <PokemonDisplayer />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <HomePage />
+          </Route>
+          <Route path="/connection">
+            <SignIn />
           </Route>
         </Switch>
       </div>
