@@ -9,6 +9,8 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import MenuItem from '@material-ui/core/MenuItem';
+
 import axios from 'axios';
 
 function Copyright() {
@@ -47,6 +49,8 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
     const classes = useStyles();
     const [users, setUsers] = useState([]);
+    const [selectedUser, setSelectedUser] = useState({prenom:'None'});
+
 
     useEffect(() => {
         const getUsers = async() => {
@@ -58,7 +62,12 @@ export default function SignIn() {
     getUsers();
 },[]);
 
-    
+    const changeHandler = (event) => {
+        let eventName = event.target.name;
+        let eventValue = event.target.value;
+
+        setSelectedUser({prenom:eventValue});
+    }; 
   
     return (
       <Container component="main" maxWidth="xs">
@@ -74,13 +83,22 @@ export default function SignIn() {
               variant="outlined"
               margin="normal"
               required
+              select
+              value={selectedUser.prenom}
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="user"
+              label="Utilisateur"
+              name="user"
+              autoComplete="user"
               autoFocus
-            />
+              onChange={changeHandler}
+            >
+                {users.map((user) => {
+                    let name = user.name.first;
+                    return(<MenuItem value={name} key={name}>{name}</MenuItem>);
+                })}
+
+            </TextField>
             
             <Button
               type="submit"
