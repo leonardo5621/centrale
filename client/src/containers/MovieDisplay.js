@@ -1,15 +1,42 @@
 import React,{useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import MovieCard from '../components/MovieCard';
+import Grid from '@material-ui/core/Grid';
+import MovieCard from '../components/movies/MovieCard';
+import MovieRate from '../components/movies/MovieRate';
 import ToolBar from '../components/ToolBar';
 import Typography from '@material-ui/core/Typography';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import homeStyle from '../components/HomeStyle';
-import { Container } from '@material-ui/core';
+import { Container, Button } from '@material-ui/core';
 
 export default function MovieDisplay() {
+    const [openRateCard, setRateCard] = useState(false);
     const state = useSelector(state => state);
     const classes = homeStyle();
+    let rateCard;
+
+    const changeDisplay= () => {
+            setRateCard(!openRateCard);
+    }
+
+    if(openRateCard){
+        rateCard = (
+            <Grid container spacing={4} alignItems="center" justify="center">
+                <MovieCard Title={state.movie.Title} Poster={state.movie.Poster} Plot={state.movie.Plot} />
+                <MovieRate Title={state.movie.Title} Rated={false}/>
+
+            </Grid>
+            
+        );
+
+    } else{
+        rateCard = (
+            <Grid container spacing={4} alignItems="center" justify="center">
+                <MovieCard Title={state.movie.Title} Poster={state.movie.Poster} Plot={state.movie.Plot} />
+                
+            </Grid>
+        );
+    }
 
     return (
         <React.Fragment>
@@ -27,7 +54,21 @@ export default function MovieDisplay() {
                     </Container>
                 </div>
 
-                <MovieCard Title={state.movie.Title} Poster={state.movie.Poster} Plot={state.movie.Plot} />
+                <Container className={classes.cardGrid} maxWidth="md">
+                        {rateCard}                        
+                  
+                </Container>
+
+                <Grid container alignItems="center" justify="center">
+                    <div style={{paddingBottom:'3%'}}>
+                    <Button
+                    variant ="contained" color="secondary" onClick={changeDisplay}>
+                        Noter le Film
+                    </Button>
+                    </div>
+                   
+                </Grid>
+
 
             </main>
 
