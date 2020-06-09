@@ -4,7 +4,6 @@ import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import homeStyle from './HomeStyle';
 import {Link as LinkR} from 'react-router-dom';
@@ -12,6 +11,8 @@ import Copyright from './copyright';
 import ToolBar from './ToolBar';
 import axios from 'axios';
 import { useSelector } from "react-redux";
+
+
 
 const useStyles = homeStyle;
 
@@ -23,12 +24,11 @@ const HomePage = () => {
 
   const testApi = async() => {
         console.log('ici')
-        const M = await fetch('https://q25rjhfzij.execute-api.eu-west-1.amazonaws.com/dev/test');        
-        console.log('ici')
+        const M = await fetch('https://kljmy0vuqk.execute-api.eu-west-1.amazonaws.com/dev/hello');        
         console.log(M);
   };
 
-  //testApi();
+  testApi();
 
 
 

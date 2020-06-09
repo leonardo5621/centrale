@@ -10,17 +10,14 @@ import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-
-
-
-
-const useStyles = homeStyle;
+import {useSelector} from 'react-redux';
 
 
 export default function ToolBar(props) {
-    const classes = useStyles();
+    const classes = homeStyle();
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
+    const profile = useSelector(state => state);
 
     const handleClose = () => {
       setAnchorEl(null);
@@ -68,7 +65,7 @@ export default function ToolBar(props) {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleClose}>{profile.prenom}</MenuItem>
               </Menu>
             
 
