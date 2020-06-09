@@ -10,8 +10,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import MenuItem from '@material-ui/core/MenuItem';
-
 import axios from 'axios';
+import {useDispatch} from 'react-redux';
+import {Link as LinkR} from 'react-router-dom';
 
 function Copyright() {
   return (
@@ -48,15 +49,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
     const classes = useStyles();
-    const [users, setUsers] = useState([]);
+    const [users,setUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState({prenom:'None'});
+    const dispatcher = useDispatch();
 
 
     useEffect(() => {
         const getUsers = async() => {
-        const response = await axios.get("https://randomuser.me/api/?results=5");
-
-        console.log(response.data.results);
+          const response = await axios.get("https://randomuser.me/api/?results=5");
         setUsers(response.data.results);
     };
     getUsers();
@@ -99,16 +99,25 @@ export default function SignIn() {
                 })}
 
             </TextField>
-            
+            <LinkR to='/movieList'>
             <Button
-              type="submit"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={() => {
+                console.log('ici');
+                  dispatcher({
+                    type:'LOGIN',
+                    prenom: selectedUser.prenom
+                  })
+              }}
+            
             >
               Confirmer
             </Button>
+
+            </LinkR>
             <Grid container>
               
               <Grid item>

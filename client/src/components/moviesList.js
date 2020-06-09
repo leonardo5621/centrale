@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -14,6 +14,9 @@ import homeStyle from './HomeStyle';
 import {Link as LinkR} from 'react-router-dom';
 import Copyright from './copyright';
 import ToolBar from './ToolBar';
+import axios from 'axios';
+
+// Liste de films
 
 const useStyles = homeStyle;
 
@@ -21,12 +24,22 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 
 export default function MoviesList() {
+    const [cards, setCards] = useState([]);
     const classes = useStyles();
+    useEffect(() => {
+    const getMovies = async () => {
+      let m1 = await axios.get('http://www.omdbapi.com/?i=tt3896198&apikey=e5eca88b');
+      let m2 = await axios.get('http://www.omdbapi.com/?t=Blade+Runner&apikey=e5eca88b');
+      let m3 = await axios.get('http://www.omdbapi.com/?t=The+Witcher&apikey=e5eca88b');
+      console.log(m1.data);
+      setCards([m1.data,m2.data,m3.data]);
+    }
+      getMovies();
+  },[])
 
     return (
         <React.Fragment>
         <CssBaseline />
-
         <ToolBar />
         
         <main>
@@ -61,15 +74,15 @@ export default function MoviesList() {
                   <Card className={classes.card}>
                     <CardMedia
                       className={classes.cardMedia}
-                      image="https://source.unsplash.com/random"
-                      title="Image title"
+                      image={card.Poster}
+                      title={card.Title}
                     />
                     <CardContent className={classes.cardContent}>
                       <Typography gutterBottom variant="h5" component="h2">
-                        Heading
+                        {card.Title}
                       </Typography>
                       <Typography>
-                        This is a media card. You can use this section to describe the content.
+                        {card.Plot}
                       </Typography>
                     </CardContent>
                     <CardActions>
