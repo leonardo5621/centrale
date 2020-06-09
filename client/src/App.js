@@ -4,12 +4,13 @@ import PokemonDisplayer from "./components/PokemonDisplayer";
 import HomePage from "./components/HomePage";
 import SignIn from "./components/Connection";
 import MoviesList from './components/moviesList';
+import MovieDisplay from './containers/MovieDisplay';
 
 function App() {
   return (
     <Router>
       <div>
-        <nav>
+        {/* <nav>
           <ul>
             <li>
               <Link to="/">Home</Link>
@@ -18,7 +19,7 @@ function App() {
               <Link to="/demo">API Fetch demo</Link>
             </li>
           </ul>
-        </nav>
+        </nav> */}
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
@@ -31,8 +32,11 @@ function App() {
           <Route path="/connection">
             <SignIn />
           </Route>
-          <Route path="/movieList">
+          <Route exact path="/movieList">
               <MoviesList />
+          </Route>
+          <Route exact path="/movieDetail">
+            <MovieDisplay />
           </Route>
         </Switch>
       </div>

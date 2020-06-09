@@ -106,7 +106,6 @@ export default function SignIn() {
               color="primary"
               className={classes.submit}
               onClick={() => {
-                console.log('ici');
                   dispatcher({
                     type:'LOGIN',
                     prenom: selectedUser.prenom

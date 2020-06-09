@@ -9,23 +9,21 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
 import homeStyle from './HomeStyle';
 import {Link as LinkR} from 'react-router-dom';
 import Copyright from './copyright';
 import ToolBar from './ToolBar';
 import axios from 'axios';
+import {useDispatch} from 'react-redux';
 
 // Liste de films
 
-const useStyles = homeStyle;
-
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-
 export default function MoviesList() {
     const [cards, setCards] = useState([]);
-    const classes = useStyles();
+    const classes = homeStyle();
+    const dispatcher = useDispatch();
+
+    //Changement d'état, fonction qui récupère des données des films
     useEffect(() => {
     const getMovies = async () => {
       let m1 = await axios.get('http://www.omdbapi.com/?i=tt3896198&apikey=e5eca88b');
@@ -86,9 +84,21 @@ export default function MoviesList() {
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      <Button size="small" color="primary">
-                        View
-                      </Button>
+                      <LinkR to="/movieDetail">
+                        <Button size="small" color="primary"
+                        onClick={() => {
+                          dispatcher({
+                            type:'MOVIE',
+                            movie:{
+                              Title:card.Title,
+                              Plot:card.Plot,
+                              Poster:card.Poster
+                            }
+                          })
+                        }}>
+                          View
+                        </Button>
+                      </LinkR>
                       <Button size="small" color="primary">
                         Edit
                       </Button>
