@@ -8,6 +8,7 @@ import Container from '@material-ui/core/Container';
 import homeStyle from './HomeStyle';
 import {Link as LinkR} from 'react-router-dom';
 import Copyright from './copyright';
+import Footer from './Footer';
 import ToolBar from './ToolBar';
 import axios from 'axios';
 import { useSelector } from "react-redux";
@@ -79,16 +80,7 @@ const HomePage = () => {
     </main>
 
     {/* Footer */}
-    <footer className={classes.footer}>
-      <Typography variant="h6" align="center" gutterBottom>
-
-      </Typography>
-      <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-        Projet Site Internet EI3
-      </Typography>
-      <Copyright />
-    </footer>
-    {/* End footer */}
+      <Footer />
     </React.Fragment>
   );
 };

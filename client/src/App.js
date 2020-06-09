@@ -5,6 +5,7 @@ import HomePage from "./components/HomePage";
 import SignIn from "./components/Connection";
 import MoviesList from './components/moviesList';
 import MovieDisplay from './containers/MovieDisplay';
+import MovieCreate from './containers/MovieCreate';
 
 function App() {
   return (
@@ -37,6 +38,9 @@ function App() {
           </Route>
           <Route exact path="/movieDetail">
             <MovieDisplay />
+          </Route>
+          <Route exact path="/movieCreate">
+            <MovieCreate />
           </Route>
         </Switch>
       </div>

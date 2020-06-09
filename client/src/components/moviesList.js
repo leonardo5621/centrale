@@ -7,14 +7,13 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import homeStyle from './HomeStyle';
 import {Link as LinkR} from 'react-router-dom';
-import Copyright from './copyright';
 import ToolBar from './ToolBar';
 import axios from 'axios';
 import {useDispatch} from 'react-redux';
+import Footer from './Footer';
 
 // Liste de films
 
@@ -108,18 +107,22 @@ export default function MoviesList() {
               ))}
             </Grid>
           </Container>
+
+          <Grid container alignItems="center" justify="center">
+              <div style={{paddingBottom:'3%'}}>
+                  <LinkR to="/movieCreate">
+                    <Button
+                    variant ="contained" color="secondary">
+                    Ajouter un Film
+                    </Button>
+                  </LinkR>
+              </div>
+                   
+          </Grid>
         </main>
     
         {/* Footer */}
-        <footer className={classes.footer}>
-          <Typography variant="h6" align="center" gutterBottom>
-    
-          </Typography>
-          <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-            Projet Site Internet EI3
-          </Typography>
-          <Copyright />
-        </footer>
+        <Footer />
         {/* End footer */}
         </React.Fragment>
     )

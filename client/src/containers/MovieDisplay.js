@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import homeStyle from '../components/HomeStyle';
 import { Container, Button } from '@material-ui/core';
+import Footer from '../components/Footer';
 
 export default function MovieDisplay() {
     const [openRateCard, setRateCard] = useState(false);
@@ -72,14 +73,8 @@ export default function MovieDisplay() {
 
             </main>
 
-            <footer className={classes.footer}>
-          <Typography variant="h6" align="center" gutterBottom>
-    
-          </Typography>
-          <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-            Projet Site Internet EI3
-          </Typography>
-            </footer>
+            <Footer/>
+
         </React.Fragment>
         
     )
