@@ -33,9 +33,8 @@ export default function SignIn() {
     useEffect(() => {
         const getUsers = async() => {
         const response = await axios.get("https://q25rjhfzij.execute-api.eu-west-1.amazonaws.com/dev/getUsers");
-        
+        console.log('response',response)
         setUsers(response.data);
-        setUsers(response);
     };
     getUsers();
 },[]);
@@ -57,7 +56,7 @@ export default function SignIn() {
           setUsers([{name : username},...users]) ; 
           alert('Utilisateur ajouté') ;
           setAddingUser(false) ; 
-          axios.post("https://q25rjhfzij.execute-api.eu-west-1.amazonaws.com/dev/addNewUser",{name : username});
+          axios.post("https://q25rjhfzij.execute-api.eu-west-1.amazonaws.com/dev/addUser",{name : username});
         }
         else {
           alert('Identifiant déjà utilisé')
