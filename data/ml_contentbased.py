@@ -3,7 +3,7 @@ import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-df = pd.read_csv("C:\\Users\\murie_3059d25\\Desktop\\centrale\\movie_dataset.txt")
+df = pd.read_csv("data\movie_dataset.txt")
 features = ['keywords','cast','genres','director']
 
 def combine_features(row):
