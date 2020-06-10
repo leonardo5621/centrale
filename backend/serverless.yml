@@ -54,6 +54,44 @@ functions:
             origin: http://localhost:3000
             allowCredentials: true
 
+  test:
+    handler: functions/test.handle
+    events:
+      - http:
+          path: test
+          method: get
+
+  addMovie:
+    handler: functions/addMovie.handle
+    events:
+      - http:
+          method: post
+          path: addMovie
+          cors:
+            origin: http://localhost:3000
+            allowCredentials: true
+        
+  getMovies:
+    handler: functions/getMovies.handle
+    events:
+      - http:
+          path: getMovies
+          method: get
+
+  moviesP:
+    handler: functions/movies.handle
+    events:
+      - http:
+          path: movies/{lastElementUuid}
+          method: get
+      
+  movies:
+    handler: functions/movies.handle
+    events:
+      - http:
+          path: movies
+          method: get
+      
 custom:
   stageVars: ${file(./stage.${self:provider.stage}.yml)}
 
