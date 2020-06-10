@@ -25,11 +25,12 @@ const HomePage = () => {
 
   const testApi = async() => {
         console.log('ici')
-        const M = await fetch('https://kljmy0vuqk.execute-api.eu-west-1.amazonaws.com/dev/hello');        
+        const M = await axios('https://cors-anywhere.herokuapp.com/kljmy0vuqk.execute-api.eu-west-1.amazonaws.com/dev/hello');        
+        //const M = await axios('https://kljmy0vuqk.execute-api.eu-west-1.amazonaws.com/dev/hello');
         console.log(M);
   };
 
-  //testApi();
+  testApi();
 
 
 
