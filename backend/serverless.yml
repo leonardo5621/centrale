@@ -70,12 +70,29 @@ functions:
           cors:
             origin: http://localhost:3000
             allowCredentials: true
+
+  addUser:
+    handler: functions/addUser.handle
+    events:
+      - http:
+          method: post
+          path: addUser
+          cors:
+            origin: http://localhost:3000
+            allowCredentials: true
         
   getMovies:
     handler: functions/getMovies.handle
     events:
       - http:
           path: getMovies
+          method: get
+
+  getUsers:
+    handler: functions/getUsers.handle
+    events:
+      - http:
+          path: getUsers
           method: get
 
   moviesP:
