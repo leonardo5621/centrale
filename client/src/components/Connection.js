@@ -33,7 +33,7 @@ export default function SignIn() {
     useEffect(() => {
         const getUsers = async() => {
         const response = await axios.get("https://q25rjhfzij.execute-api.eu-west-1.amazonaws.com/dev/getUsers");
-        
+        console.log('response',response)
         setUsers(response.data);
         setUsers(response);
     };
