@@ -2,12 +2,16 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import PokemonDisplayer from "./components/PokemonDisplayer";
 import HomePage from "./components/HomePage";
+import SignIn from "./components/Connection";
+import MoviesList from './components/moviesList';
+import MovieDisplay from './containers/MovieDisplay';
+import MovieCreate from './containers/MovieCreate';
 
 function App() {
   return (
     <Router>
       <div>
-        <nav>
+        {/* <nav>
           <ul>
             <li>
               <Link to="/">Home</Link>
@@ -16,15 +20,27 @@ function App() {
               <Link to="/demo">API Fetch demo</Link>
             </li>
           </ul>
-        </nav>
+        </nav> */}
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/demo">
+          <Route  path="/demo">
             <PokemonDisplayer />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <HomePage />
+          </Route>
+          <Route path="/connection">
+            <SignIn />
+          </Route>
+          <Route exact path="/movieList">
+              <MoviesList />
+          </Route>
+          <Route exact path="/movieDetail">
+            <MovieDisplay />
+          </Route>
+          <Route exact path="/movieCreate">
+            <MovieCreate />
           </Route>
         </Switch>
       </div>
