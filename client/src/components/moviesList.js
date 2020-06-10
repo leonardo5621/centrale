@@ -12,7 +12,7 @@ import homeStyle from './HomeStyle';
 import {Link as LinkR} from 'react-router-dom';
 import ToolBar from './ToolBar';
 import axios from 'axios';
-import {useDispatch} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import Footer from './Footer';
 
 // Liste de films
@@ -21,15 +21,42 @@ export default function MoviesList() {
     const [cards, setCards] = useState([]);
     const classes = homeStyle();
     const dispatcher = useDispatch();
+    const state = useSelector(state => state);
+    let connectButton;
+
+    if(state.prenom == 'none'){
+        connectButton=(
+          <LinkR to="/connection">
+                    <Button variant="contained" color="primary">
+                      Connectez-vous
+                    </Button>
+    
+          </LinkR>
+        );
+    } else{
+      connectButton = '';
+    }
 
     //Changement d'état, fonction qui récupère des données des films
     useEffect(() => {
     const getMovies = async () => {
-      let m1 = await axios.get('http://www.omdbapi.com/?i=tt3896198&apikey=e5eca88b');
-      let m2 = await axios.get('http://www.omdbapi.com/?t=Blade+Runner&apikey=e5eca88b');
-      let m3 = await axios.get('http://www.omdbapi.com/?t=The+Witcher&apikey=e5eca88b');
-      console.log(m1.data);
-      setCards([m1.data,m2.data,m3.data]);
+      // let m1 = await axios.get('http://www.omdbapi.com/?i=tt3896198&apikey=e5eca88b');
+      // let m2 = await axios.get('http://www.omdbapi.com/?t=Blade+Runner&apikey=e5eca88b');
+      // let m3 = await axios.get('http://www.omdbapi.com/?t=The+Witcher&apikey=e5eca88b');
+
+      axios.get('https://cors-anywhere.herokuapp.com/q25rjhfzij.execute-api.eu-west-1.amazonaws.com/dev/getMovies')
+        .then((response) => {
+          setCards(response.data);
+        })
+        .catch(function (error) {
+          if (error.response) {
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+          }
+        });
+
+      setCards([]);
     }
       getMovies();
   },[])
@@ -51,12 +78,7 @@ export default function MoviesList() {
                 <Grid container spacing={2} justify="center">
                   <Grid item>
     
-                    <LinkR to="/connection">
-                    <Button variant="contained" color="primary">
-                      Connectez-vous
-                    </Button>
-    
-                    </LinkR>
+                    {connectButton}
                     
                   </Grid>
                   
@@ -71,15 +93,16 @@ export default function MoviesList() {
                   <Card className={classes.card}>
                     <CardMedia
                       className={classes.cardMedia}
-                      image={card.Poster}
-                      title={card.Title}
+                      image={card.picture}
+                      title={card.name}
                     />
                     <CardContent className={classes.cardContent}>
                       <Typography gutterBottom variant="h5" component="h2">
-                        {card.Title}
+                        Nom: {card.name}
                       </Typography>
                       <Typography>
-                        {card.Plot}
+                        Année: {card.year} <br/>
+                        Réalisateur: {card.realizer}
                       </Typography>
                     </CardContent>
                     <CardActions>
@@ -89,9 +112,11 @@ export default function MoviesList() {
                           dispatcher({
                             type:'MOVIE',
                             movie:{
-                              Title:card.Title,
-                              Plot:card.Plot,
-                              Poster:card.Poster
+                              name:card.name,
+                              year:card.year,
+                              realizer:card.realizer,
+                              actors: card.actors,
+                              picture: card.picture
                             }
                           })
                         }}>

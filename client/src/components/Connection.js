@@ -15,13 +15,18 @@ import useStyles from './FormStyle';
 import Footer from './Footer';
 import Box from '@material-ui/core/Box';
 
+//Page de connection, il s'agit pas d'authentifier les utilisateurs
+// Mais de simplement choisir un profil
+
 export default function SignIn() {
     const classes = useStyles();
+
+    // Variables de contrôle de choix
     const [users,setUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState({prenom:'None'});
     const dispatcher = useDispatch();
 
-
+    // Fonction qui récupère les utilisateurs de la BDD
     useEffect(() => {
         const getUsers = async() => {
           const response = await axios.get("https://randomuser.me/api/?results=5");
@@ -30,6 +35,7 @@ export default function SignIn() {
     getUsers();
 },[]);
 
+      // Fonction responsable pour contrôle les champs du formulaire 
     const changeHandler = (event) => {
         let eventName = event.target.name;
         let eventValue = event.target.value;
@@ -46,7 +52,12 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Choisissez votre profil
           </Typography>
+
+          {/* Formulaire de choix de l'utilisateur, avec un seul champ */}
+
           <form className={classes.form} noValidate>
+
+            {/*Champ de choix multiple parmi les utilisateurs */}
             <TextField
               variant="outlined"
               margin="normal"
@@ -61,6 +72,7 @@ export default function SignIn() {
               autoFocus
               onChange={changeHandler}
             >
+                {/* Options d'utilisateur disponibles */}
                 {users.map((user) => {
                     let name = user.name.first;
                     return(<MenuItem value={name} key={name}>{name}</MenuItem>);
@@ -86,6 +98,8 @@ export default function SignIn() {
 
             </LinkR>
             <Grid container>
+
+              {/* Création de Compte */}
               
               <Grid item>
                 <Link href="#" variant="body2">

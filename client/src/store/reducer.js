@@ -1,9 +1,11 @@
 const initialState = {
     prenom:'none',
     movie: {
-        Title: 'Filme',
-        Plot: "C'est un film",
-        Poster: 'none'
+        name: 'Filme',
+        year: "2020",
+        picture: '',
+        actors:[],
+        realizer:'Leo'
     }
 }
 

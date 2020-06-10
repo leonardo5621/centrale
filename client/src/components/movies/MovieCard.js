@@ -26,7 +26,7 @@ export default function MovieCard(props) {
                         {props.Title}
                       </Typography>
                       <Typography>
-                        {props.Plot}
+                       Réalisateur: {props.Realizer}
                       </Typography>
                     </CardContent>
                     <CardActions>

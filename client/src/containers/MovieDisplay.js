@@ -23,8 +23,8 @@ export default function MovieDisplay() {
     if(openRateCard){
         rateCard = (
             <Grid container spacing={4} alignItems="center" justify="center">
-                <MovieCard Title={state.movie.Title} Poster={state.movie.Poster} Plot={state.movie.Plot} />
-                <MovieRate Title={state.movie.Title} Rated={false}/>
+                <MovieCard Title={state.movie.name} Poster={state.movie.picture} Plot={state.movie.Realizer} />
+                <MovieRate Title={state.movie.name} Rated={false}/>
 
             </Grid>
             
@@ -33,7 +33,7 @@ export default function MovieDisplay() {
     } else{
         rateCard = (
             <Grid container spacing={4} alignItems="center" justify="center">
-                <MovieCard Title={state.movie.Title} Poster={state.movie.Poster} Plot={state.movie.Plot} />
+                <MovieCard Title={state.movie.name} Poster={state.movie.picture} Realizer={state.movie.realizer}/>
                 
             </Grid>
         );

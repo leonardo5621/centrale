@@ -17,13 +17,23 @@ import Footer from '../components/Footer';
 
 function MovieCreate() {
     const classes = useStyles();
-    const [movie, setMovie] = useState({Title:"", Genre:"", Length:"", Plot:"", Poster:""});
+    const [movie, setMovie] = useState({name:"", year:"", realizer:"", actors:"", picture:""});
 
+    const postMovie = async () => {
+        let postFile = {name:'test', picture:'test', year:'2020', actors:[], realizer:'moi'};
+        axios.post('https://cors-anywhere.herokuapp.com/q25rjhfzij.execute-api.eu-west-1.amazonaws.com/dev/addMovie',movie)
+        .catch(error => {
+          console.log(error)
+      });
+    };
+    
     const changeHandler = (event) => {
 
         let eventName = event.target.name;
         let eventValue = event.target.value;
-        console.log(eventValue);
+        if (eventName === 'actors'){
+          eventValue = eventValue.split(',');
+        }
         let newState = {...movie};
         newState[eventName] = eventValue;
 
@@ -43,42 +53,42 @@ function MovieCreate() {
             Ajouter un nouveau film
           </Typography>
 
-          <form className={classes.form} noValidate>
+          {/* <form className={classes.form} noValidate> */}
             <TextField
               variant="outlined" margin="normal"
               required
-              value={movie.Title}
+              value={movie.name}
               fullWidth
-              id="title" label="Titre" name="Title"
+              id="title" label="Titre" name="name"
               autoFocus autoComplete="Title" onChange={changeHandler}
             ></TextField>
 
             <TextField
               variant="outlined" margin="normal"
               required
-              value={movie.Genre}
+              value={movie.realizer}
               fullWidth
-              id="genre" label="Genre" name="Genre"
+              id="genre" label="Réalisateur" name="realizer"
               autoFocus onChange={changeHandler}
             ></TextField>
 
             <TextField
               variant="outlined" margin="normal"
               required
-              value={movie.Length}
+              value={movie.acteurs}
               fullWidth
-              id="length" label="Taille" name="Length"
+              id="length" label="Acteurs(séparez avec des virgules)" name="acteurs"
               autoFocus onChange={changeHandler}
             ></TextField>
 
             <TextField
               variant="outlined" margin="normal"
               required
-              value={movie.Plot}
+              value={movie.year}
               multiline
               fullWidth
               rowsMax={5}
-              id="plot" label="Description" name="Plot"
+              id="plot" label="Année" name="year"
               autoFocus onChange={changeHandler}
             ></TextField>
 
@@ -86,7 +96,7 @@ function MovieCreate() {
             fullWidth
               variant="outlined" margin="normal"
               value={movie.Poster}
-              id="poster" label="Image(URL)" name="Poster"
+              id="poster" label="Image(URL)" name="picture"
               autoFocus onChange={changeHandler}
             ></TextField>
 
@@ -95,7 +105,8 @@ function MovieCreate() {
               type="submit"
               variant="contained"
               color="primary"
-              className={classes.submit}          
+              className={classes.submit}  
+              onClick={postMovie}        
             >
               Confirmer
             </Button>
@@ -108,7 +119,7 @@ function MovieCreate() {
                 </Link>
               </Grid>
             </Grid>
-          </form>
+          {/* </form> */}
         </div>
         <Box mt={3}>
             <Footer />

@@ -3,11 +3,12 @@ import Copyright from './copyright';
 import Typography from '@material-ui/core/Typography';
 import homeStyle from './HomeStyle';
 
+// Composant fonctionnel du footer des pages
 
 export default function Footer() {
     const classes = homeStyle();
     return (
-        <footer className={classes.footer}>
+      <footer className={classes.footer}>
           <Typography variant="h6" align="center" gutterBottom>
     
           </Typography>
@@ -16,6 +17,6 @@ export default function Footer() {
           </Typography>
           <Copyright />
 
-            </footer>
+        </footer>
     )
 }

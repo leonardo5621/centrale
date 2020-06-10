@@ -10,17 +10,31 @@ import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+
+//Composant fonctionnel de la barre en haut des pages
 
 
 export default function ToolBar(props) {
     const classes = homeStyle();
+
+    //Contrôle du petit onglet avec le prénom de l'utilisateur 
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
+
+    // Variables de Redux
     const profile = useSelector(state => state);
+    const dispatch = useDispatch();
 
     const handleClose = () => {
       setAnchorEl(null);
+    };
+
+    const handleDec = () => {
+        dispatch({
+          type:'LOGIN',
+          prenom:'none'
+        });
     };
 
     const handleMenu = (event) => {
@@ -30,14 +44,22 @@ export default function ToolBar(props) {
     return (
         <AppBar position="static">
           <Toolbar>
+
+            {/*Icon en haut à gauche de la page */}
             <CameraRollIcon className={classes.icon} />
             <Typography variant="h6" color="inherit" className={classes.title}>
               Films
             </Typography>
 
+            {/*Liens en haut à droite */}
+
             <LinkR to="/">
                 <Button color="primary" variant="contained">Accueil</Button>
             </LinkR>
+            <LinkR to="/movieList">
+                <Button color="default" variant="contained">Liste de Filmes</Button>
+            </LinkR>
+
 
               <IconButton
                 aria-label="account of current user"
@@ -49,6 +71,8 @@ export default function ToolBar(props) {
               >
                 <AccountCircle />
               </IconButton>
+
+              {/*Petit onglet qui affiche le prénom de l'utilisateur */}
 
               <Menu
                 id="menu-appbar"
@@ -66,6 +90,9 @@ export default function ToolBar(props) {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>{profile.prenom}</MenuItem>
+                <LinkR to="/">
+                  <MenuItem onClick={handleDec}>Déconnecter</MenuItem>
+                </LinkR>
               </Menu>
             
 
