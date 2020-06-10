@@ -1,9 +1,13 @@
 # package directories
 node_modules
 jspm_packages
+functionsc
 
 # Serverless directories
 .serverless
 
 # User specific files
 stage.dev.yml
+serverless2.yml
+yarn2.lock
+package2.json
