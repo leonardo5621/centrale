@@ -23,6 +23,9 @@ functions:
       - http:
           path: hello
           method: get
+          cors:
+            origin: "*"
+            allowCredentials: true
 
   get:
     handler: functions/get.handle
@@ -31,8 +34,10 @@ functions:
           method: get
           path: items/{id}
           cors:
-            origin: http://localhost:3000
+            origin: "*"
             allowCredentials: true
+
+ 
 
   create:
     handler: functions/create.handle
@@ -41,7 +46,7 @@ functions:
           method: post
           path: items
           cors:
-            origin: http://localhost:3000
+            origin: "*"
             allowCredentials: true
 
   list:
@@ -51,7 +56,7 @@ functions:
           method: get
           path: items
           cors:
-            origin: http://localhost:3000
+            origin: "*"
             allowCredentials: true
 
   test:
@@ -60,6 +65,9 @@ functions:
       - http:
           path: test
           method: get
+          cors:
+            origin: "*"
+            allowCredentials: true
 
   addMovie:
     handler: functions/addMovie.handle
@@ -67,9 +75,10 @@ functions:
       - http:
           method: post
           path: addMovie
-          cors:
-            origin: http://localhost:3000
+          cors: 
+            origin: "*"
             allowCredentials: true
+
 
   addUser:
     handler: functions/addUser.handle
@@ -78,7 +87,7 @@ functions:
           method: post
           path: addUser
           cors:
-            origin: http://localhost:3000
+            origin: "*"
             allowCredentials: true
         
   getMovies:
@@ -87,6 +96,9 @@ functions:
       - http:
           path: getMovies
           method: get
+          cors:
+            origin: "*"
+            allowCredentials: true
 
   getUsers:
     handler: functions/getUsers.handle
@@ -94,6 +106,9 @@ functions:
       - http:
           path: getUsers
           method: get
+          cors:
+            origin: "*"
+            allowCredentials: true
 
   moviesP:
     handler: functions/movies.handle
@@ -101,6 +116,9 @@ functions:
       - http:
           path: movies/{lastElementUuid}
           method: get
+          cors:
+            origin: "*"
+            allowCredentials: true
       
   movies:
     handler: functions/movies.handle
@@ -108,7 +126,20 @@ functions:
       - http:
           path: movies
           method: get
+          cors:
+            origin: "*"
+            allowCredentials: true
       
+  getMovieDetails: 
+    handler : functions/getMovieDetails.handle
+    events:
+      - http:
+          method: get
+          path: moviedetails/{id}
+          cors:
+            origin: "*"
+            allowCredentials: true
+
 custom:
   stageVars: ${file(./stage.${self:provider.stage}.yml)}
 
