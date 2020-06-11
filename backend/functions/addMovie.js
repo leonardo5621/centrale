@@ -14,6 +14,7 @@ module.exports.handle = async event => {
         name: data.name,
         picture: data.picture,
         year: data.year,
+        description : data.description,
         actors: data.actors,
         realizer: data.realizer,
         createdAt: Date.now(),

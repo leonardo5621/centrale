@@ -138,6 +138,11 @@ export default function SignIn() {
 
             </LinkR>
           </form>
+          <LinkR to={'/'}  style={{textDecoration:'none'}}>
+            <p style={{textAlign:'center'}}>Accueil</p>
+
+            </LinkR>
+
         </div>
         <NewUserDialog close={onClose} open={addingNewUser}/>
         <Box mt={5}>

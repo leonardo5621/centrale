@@ -52,12 +52,18 @@ export default function ToolBar(props) {
             </Typography>
 
             {/*Liens en haut à droite */}
-
-            <LinkR to="/">
+            
+            <LinkR style={{textDecoration:'none', marginRight:10}} to="/">
                 <Button color="primary" variant="contained">Accueil</Button>
             </LinkR>
-            <LinkR to="/movies/movieList">
-                <Button color="default" variant="contained">Liste de Filmes</Button>
+            <LinkR style={{textDecoration:'none', marginRight:10}}  to="/movies/movieList">
+                <Button color="default" variant="contained">Liste de Films</Button>
+            </LinkR>
+            <LinkR style={{textDecoration:'none', marginRight:10}}  to="/movies/movieCreate">
+                <Button
+                    variant ="contained" color="secondary">
+                    Ajouter un Film
+                </Button>
             </LinkR>
 
 

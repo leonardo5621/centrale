@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import CameraIcon from '@material-ui/icons/Camera';
 import useStyles from '../components/FormStyle';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
@@ -17,14 +16,16 @@ import Footer from '../components/Footer';
 
 function MovieCreate() {
     const classes = useStyles();
-    const [movie, setMovie] = useState({name:"", year:"", realizer:"", actors:"", picture:""});
+    const [movie, setMovie] = useState({name:"", year:"", realizer:"", actors:"", picture:"", description : ""});
 
     const postMovie = async () => {
-        let postFile = {name:'test', picture:'test', year:'2020', actors:[], realizer:'moi'};
+      if(movie.name){
         axios.post('https://cors-anywhere.herokuapp.com/q25rjhfzij.execute-api.eu-west-1.amazonaws.com/dev/addMovie',movie)
         .catch(error => {
-          console.log(error)
-      });
+            console.log(error)
+        });
+      }
+       
     };
     
     const changeHandler = (event) => {
@@ -47,7 +48,6 @@ function MovieCreate() {
 
         <div className={classes.paper}>
 
-          <CameraIcon />
 
           <Typography component="h1" variant="h5">
             Ajouter un nouveau film
@@ -92,6 +92,9 @@ function MovieCreate() {
               autoFocus onChange={changeHandler}
             ></TextField>
 
+           
+
+
             <TextField
             fullWidth
               variant="outlined" margin="normal"
@@ -100,7 +103,20 @@ function MovieCreate() {
               autoFocus onChange={changeHandler}
             ></TextField>
 
-            <LinkR to="movies/movieList">
+            <TextField
+              variant="outlined" margin="normal"
+              required
+              value={movie.description}
+              multiline
+              rows={3}
+              fullWidth
+              rowsMax={5}
+              id="description" label="Description" name="description"
+              autoFocus onChange={changeHandler}
+            ></TextField>
+
+
+            <LinkR style={{textDecoration:'none'}} to="/movies/movieList">
               <Button
                 fullWidth
                 type="submit"
@@ -109,20 +125,15 @@ function MovieCreate() {
                 className={classes.submit}  
                 onClick={postMovie}        
               >
-                Confirmer
+                Ajouter
                 </Button>
             </LinkR>
 
-            <Grid container>
-              
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-          {/* </form> */}
+            
         </div>
+        <LinkR to={'/'}  style={{textDecoration:'none'}}>
+            <p style={{textAlign:'center'}}>retour</p>
+        </LinkR>
         <Box mt={3}>
             <Footer />
         </Box>

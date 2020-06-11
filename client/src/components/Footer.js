@@ -9,13 +9,13 @@ export default function Footer() {
     const classes = homeStyle();
     return (
       <footer className={classes.footer}>
-          <Typography variant="h6" align="center" gutterBottom>
-    
-          </Typography>
+          
           <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
             Projet Site Internet EI3
           </Typography>
-          <Copyright />
+         {
+         // <Copyright />
+        }
 
         </footer>
     )

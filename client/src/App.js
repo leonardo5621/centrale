@@ -20,19 +20,21 @@ function App() {
           <Route exact path="/">
             <HomePage />
           </Route>
-          <Route path="/connection">
+          <Route exact path="/connection">
             <SignIn />
           </Route>
           <Route exact path="/movies/movieList">
               <MoviesList />
           </Route>
-          <Route path="/movies/movieList/:userID" composant={MovieRec} />
-
-          <Route path="/movies/:movieID" component={MovieDisplay} />
-
+          <Route exact path="/movies/movieList/:userID" composant={MovieRec} />
           <Route exact path="/movies/movieCreate">
             <MovieCreate />
           </Route>
+          <Route exact path="/movies/:movieID" component={MovieDisplay} />
+          <Route>
+            <HomePage />
+          </Route>
+         
         </Switch>
       </div>
     </Router>

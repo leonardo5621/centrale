@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
       flexGrow: 1,
     },
     footer: {
-      backgroundColor: theme.palette.background.paper,
+      //backgroundColor: theme.palette.background.paper,
       padding: theme.spacing(6),
     },
     title: {

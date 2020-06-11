@@ -10,6 +10,7 @@ import homeStyle from '../components/HomeStyle';
 import { Container, Button } from '@material-ui/core';
 import Footer from '../components/Footer';
 import axios from 'axios';
+import {Link as LinkR} from 'react-router-dom';
 
 export default function MovieDisplay({match}) {
     const [openRateCard, setRateCard] = useState(false);
@@ -20,16 +21,13 @@ export default function MovieDisplay({match}) {
     useEffect(() => {
     const getMovie = async () => {
         let iD = match.params.movieID;
-        axios.get('https://cors-anywhere.herokuapp.com/q25rjhfzij.execute-api.eu-west-1.amazonaws.com/dev/moviedetails/'+iD)
+        axios.get('https://q25rjhfzij.execute-api.eu-west-1.amazonaws.com/dev/moviedetails/'+iD)
         .then((response) => {
           setState(response.data);
+          console.log('response.data',response.data)
         })
         .catch(function (error) {
-          if (error.response) {
-            console.log(error.response.data);
-            console.log(error.response.status);
-            console.log(error.response.headers);
-          }
+          console.log('error',error)
         });
 
     }
@@ -46,7 +44,7 @@ export default function MovieDisplay({match}) {
     if(openRateCard){
         rateCard = (
             <Grid container spacing={4} alignItems="center" justify="center">
-                <MovieCard Title={state.name} Poster={state.picture} Realizer={state.realizer} />
+                <MovieCard data={state} Title={state.name} Poster={state.picture} Realizer={state.realizer} />
                 <MovieRate Title={state.name} Rated={false}/>
 
             </Grid>
@@ -56,7 +54,7 @@ export default function MovieDisplay({match}) {
     } else{
         rateCard = (
             <Grid container spacing={4} alignItems="center" justify="center">
-                <MovieCard Title={state.name} Poster={state.picture} Realizer={state.realizer}/>
+                <MovieCard data={state} Title={state.name} Poster={state.picture} Realizer={state.realizer}/>
                 
             </Grid>
         );
@@ -72,7 +70,7 @@ export default function MovieDisplay({match}) {
                     <Container maxwidth="sm">
 
                     <Typography component="h2" variant="h3" align="center" color="textPrimary" gutterBottom>
-                        Détails du Filme
+                        Détails du Film
                     </Typography>
 
                     </Container>
@@ -90,10 +88,12 @@ export default function MovieDisplay({match}) {
                         Noter le Film
                     </Button>
                     </div>
-                   
+                    
                 </Grid>
 
-
+                <LinkR to={'/movies/movieList'}  style={{textDecoration:'none'}}>
+                    <p style={{textAlign:'center'}}>retour</p>
+                </LinkR>
             </main>
 
             <Footer/>
