@@ -3,7 +3,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
@@ -33,7 +32,6 @@ export default function SignIn() {
     useEffect(() => {
         const getUsers = async() => {
         const response = await axios.get("https://cors-anywhere.herokuapp.com/q25rjhfzij.execute-api.eu-west-1.amazonaws.com/dev/getUsers");
-        //console.log('response',response)
         setUsers(response.data);
     };
     getUsers();
@@ -69,7 +67,8 @@ export default function SignIn() {
         let eventName = event.target.name;
         let eventValue = event.target.value;
 
-        setSelectedUser({prenom:eventValue});
+        setSelectedUser({...eventValue});
+        console.log(eventValue);
     }; 
   
     return (
@@ -106,7 +105,7 @@ export default function SignIn() {
                 {users.map((user) => {
                     let userName = user.name;
                     if( typeof userName === 'string'){
-                      return(<MenuItem value={userName} key={userName}>{userName}</MenuItem>);
+                      return(<MenuItem value={user} key={userName}>{userName}</MenuItem>);
 
                     }
                 })}
@@ -118,17 +117,17 @@ export default function SignIn() {
                 </IconButton>
               </div>
             </div>
-            <LinkR to={selectedUser.prenom ? 'movies/movieList' : '#'}>
+            <LinkR to={selectedUser.name ? '/movies/movieList' : '#'}>
             <Button
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
               onClick={() => {
-                if(selectedUser.prenom){
+                if(selectedUser.name){
                   dispatcher({
                     type:'LOGIN',
-                    prenom: selectedUser.prenom
+                    user: selectedUser
                   })
                 }
               }}
