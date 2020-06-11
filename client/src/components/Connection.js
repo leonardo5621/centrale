@@ -32,8 +32,8 @@ export default function SignIn() {
     // Fonction qui récupère les utilisateurs de la BDD
     useEffect(() => {
         const getUsers = async() => {
-        const response = await axios.get("https://q25rjhfzij.execute-api.eu-west-1.amazonaws.com/dev/getUsers");
-        console.log('response',response)
+        const response = await axios.get("https://cors-anywhere.herokuapp.com/q25rjhfzij.execute-api.eu-west-1.amazonaws.com/dev/getUsers");
+        //console.log('response',response)
         setUsers(response.data);
     };
     getUsers();
@@ -56,7 +56,7 @@ export default function SignIn() {
           setUsers([{name : username},...users]) ; 
           alert('Utilisateur ajouté') ;
           setAddingUser(false) ; 
-          axios.post("https://q25rjhfzij.execute-api.eu-west-1.amazonaws.com/dev/addUser",{name : username});
+          axios.post("https://cors-anywhere.herokuapp.com/q25rjhfzij.execute-api.eu-west-1.amazonaws.com/dev/addUser",{name : username});
         }
         else {
           alert('Identifiant déjà utilisé')
@@ -104,8 +104,11 @@ export default function SignIn() {
               >
                 {/* Options d'utilisateur disponibles */}
                 {users.map((user) => {
-                    let {name} = user;
-                    return(<MenuItem value={name} key={name}>{name}</MenuItem>);
+                    let userName = user.name;
+                    if( typeof userName === 'string'){
+                      return(<MenuItem value={userName} key={userName}>{userName}</MenuItem>);
+
+                    }
                 })}
 
               </TextField>
@@ -135,16 +138,6 @@ export default function SignIn() {
             </Button>
 
             </LinkR>
-           {/* <Grid container>
-
-             Création de Compte
-              
-              <Grid item>
-                <Link href="#" variant="body2">
-                  <Typography> Créez votre compte</Typography>
-                </Link>
-              </Grid>
-            </Grid>*/}
           </form>
         </div>
         <NewUserDialog close={onClose} open={addingNewUser}/>
