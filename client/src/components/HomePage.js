@@ -85,7 +85,7 @@ const HomePage = () => {
 
                 {/*Lien vers le catalogue des films */}
 
-                <LinkR to="/movieList">
+                <LinkR to="movies/movieList">
                 <Button variant="outlined" color="primary">
                   Découvrez le catalogue
                 </Button>  

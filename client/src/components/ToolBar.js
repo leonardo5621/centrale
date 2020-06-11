@@ -56,7 +56,7 @@ export default function ToolBar(props) {
             <LinkR to="/">
                 <Button color="primary" variant="contained">Accueil</Button>
             </LinkR>
-            <LinkR to="/movieList">
+            <LinkR to="movies/movieList">
                 <Button color="default" variant="contained">Liste de Filmes</Button>
             </LinkR>
 

@@ -106,7 +106,7 @@ export default function MoviesList() {
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      <LinkR to="/movieDetail">
+                      <LinkR to={`movies/${card.name}`}>
                         <Button size="small" color="primary"
                         onClick={() => {
                           dispatcher({

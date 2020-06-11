@@ -118,7 +118,7 @@ export default function SignIn() {
                 </IconButton>
               </div>
             </div>
-            <LinkR to={selectedUser.prenom ? '/movieList' : '#'}>
+            <LinkR to={selectedUser.prenom ? 'movies/movieList' : '#'}>
             <Button
               fullWidth
               variant="contained"

@@ -23,7 +23,7 @@ export default function MovieDisplay() {
     if(openRateCard){
         rateCard = (
             <Grid container spacing={4} alignItems="center" justify="center">
-                <MovieCard Title={state.movie.name} Poster={state.movie.picture} Plot={state.movie.Realizer} />
+                <MovieCard Title={state.movie.name} Poster={state.movie.picture} Realizer={state.movie.realizer} />
                 <MovieRate Title={state.movie.name} Rated={false}/>
 
             </Grid>
