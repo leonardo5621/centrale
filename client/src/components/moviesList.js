@@ -40,12 +40,11 @@ export default function MoviesList() {
     //Changement d'état, fonction qui récupère des données des films
     useEffect(() => {
     const getMovies = async () => {
-      // let m1 = await axios.get('http://www.omdbapi.com/?i=tt3896198&apikey=e5eca88b');
-      // let m2 = await axios.get('http://www.omdbapi.com/?t=Blade+Runner&apikey=e5eca88b');
       // let m3 = await axios.get('http://www.omdbapi.com/?t=The+Witcher&apikey=e5eca88b');
 
       axios.get('https://cors-anywhere.herokuapp.com/q25rjhfzij.execute-api.eu-west-1.amazonaws.com/dev/getMovies')
         .then((response) => {
+          console.log(response.data);
           setCards(response.data);
         })
         .catch(function (error) {
@@ -106,7 +105,7 @@ export default function MoviesList() {
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      <LinkR to={`movies/${card.name}`}>
+                      <LinkR to={card.uuid}>
                         <Button size="small" color="primary"
                         onClick={() => {
                           dispatcher({

@@ -36,7 +36,8 @@ function App() {
           <Route exact path="/movies/movieList">
               <MoviesList />
           </Route>
-          <Route path="/movies/:movieDetail" component={MovieDisplay} />
+          <Route path="/movies/:movieID" component={MovieDisplay} />
+
           <Route exact path="/movies/movieCreate">
             <MovieCreate />
           </Route>

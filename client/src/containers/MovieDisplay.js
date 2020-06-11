@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import MovieCard from '../components/movies/MovieCard';
@@ -9,12 +9,35 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import homeStyle from '../components/HomeStyle';
 import { Container, Button } from '@material-ui/core';
 import Footer from '../components/Footer';
+import axios from 'axios';
 
-export default function MovieDisplay() {
+export default function MovieDisplay({match}) {
     const [openRateCard, setRateCard] = useState(false);
-    const state = useSelector(state => state);
+    const [state, setState] = useState({}); 
     const classes = homeStyle();
     let rateCard;
+
+    useEffect(() => {
+    const getMovie = async () => {
+        let iD = match.params.movieID;
+        axios.get('https://cors-anywhere.herokuapp.com/q25rjhfzij.execute-api.eu-west-1.amazonaws.com/dev/moviedetails/'+iD)
+        .then((response) => {
+          setState(response.data);
+        })
+        .catch(function (error) {
+          if (error.response) {
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+          }
+        });
+
+    }
+
+    getMovie();
+
+    }, [])
+
 
     const changeDisplay= () => {
             setRateCard(!openRateCard);
@@ -23,8 +46,8 @@ export default function MovieDisplay() {
     if(openRateCard){
         rateCard = (
             <Grid container spacing={4} alignItems="center" justify="center">
-                <MovieCard Title={state.movie.name} Poster={state.movie.picture} Realizer={state.movie.realizer} />
-                <MovieRate Title={state.movie.name} Rated={false}/>
+                <MovieCard Title={state.name} Poster={state.picture} Realizer={state.realizer} />
+                <MovieRate Title={state.name} Rated={false}/>
 
             </Grid>
             
@@ -33,7 +56,7 @@ export default function MovieDisplay() {
     } else{
         rateCard = (
             <Grid container spacing={4} alignItems="center" justify="center">
-                <MovieCard Title={state.movie.name} Poster={state.movie.picture} Realizer={state.movie.realizer}/>
+                <MovieCard Title={state.name} Poster={state.picture} Realizer={state.realizer}/>
                 
             </Grid>
         );
