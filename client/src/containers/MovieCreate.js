@@ -100,16 +100,18 @@ function MovieCreate() {
               autoFocus onChange={changeHandler}
             ></TextField>
 
-            <Button
-              fullWidth
-              type="submit"
-              variant="contained"
-              color="primary"
-              className={classes.submit}  
-              onClick={postMovie}        
-            >
-              Confirmer
-            </Button>
+            <LinkR to="movies/movieList">
+              <Button
+                fullWidth
+                type="submit"
+                variant="contained"
+                color="primary"
+                className={classes.submit}  
+                onClick={postMovie}        
+              >
+                Confirmer
+                </Button>
+            </LinkR>
 
             <Grid container>
               

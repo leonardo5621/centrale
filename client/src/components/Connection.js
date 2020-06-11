@@ -3,7 +3,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
@@ -32,8 +31,7 @@ export default function SignIn() {
     // Fonction qui récupère les utilisateurs de la BDD
     useEffect(() => {
         const getUsers = async() => {
-        const response = await axios.get("https://q25rjhfzij.execute-api.eu-west-1.amazonaws.com/dev/getUsers");
-        console.log('response',response)
+        const response = await axios.get("https://cors-anywhere.herokuapp.com/q25rjhfzij.execute-api.eu-west-1.amazonaws.com/dev/getUsers");
         setUsers(response.data);
     };
     getUsers();
@@ -56,7 +54,7 @@ export default function SignIn() {
           setUsers([{name : username},...users]) ; 
           alert('Utilisateur ajouté') ;
           setAddingUser(false) ; 
-          axios.post("https://q25rjhfzij.execute-api.eu-west-1.amazonaws.com/dev/addUser",{name : username});
+          axios.post("https://cors-anywhere.herokuapp.com/q25rjhfzij.execute-api.eu-west-1.amazonaws.com/dev/addUser",{name : username});
         }
         else {
           alert('Identifiant déjà utilisé')
@@ -69,7 +67,8 @@ export default function SignIn() {
         let eventName = event.target.name;
         let eventValue = event.target.value;
 
-        setSelectedUser({prenom:eventValue});
+        setSelectedUser({...eventValue});
+        console.log(eventValue);
     }; 
   
     return (
@@ -104,8 +103,11 @@ export default function SignIn() {
               >
                 {/* Options d'utilisateur disponibles */}
                 {users.map((user) => {
-                    let {name} = user;
-                    return(<MenuItem value={name} key={name}>{name}</MenuItem>);
+                    let userName = user.name;
+                    if( typeof userName === 'string'){
+                      return(<MenuItem value={user} key={userName}>{userName}</MenuItem>);
+
+                    }
                 })}
 
               </TextField>
@@ -115,17 +117,17 @@ export default function SignIn() {
                 </IconButton>
               </div>
             </div>
-            <LinkR to={selectedUser.prenom ? '/movieList' : '#'}>
+            <LinkR to={selectedUser.name ? '/movies/movieList' : '#'}>
             <Button
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
               onClick={() => {
-                if(selectedUser.prenom){
+                if(selectedUser.name){
                   dispatcher({
                     type:'LOGIN',
-                    prenom: selectedUser.prenom
+                    user: selectedUser
                   })
                 }
               }}
@@ -135,16 +137,6 @@ export default function SignIn() {
             </Button>
 
             </LinkR>
-           {/* <Grid container>
-
-             Création de Compte
-              
-              <Grid item>
-                <Link href="#" variant="body2">
-                  <Typography> Créez votre compte</Typography>
-                </Link>
-              </Grid>
-            </Grid>*/}
           </form>
         </div>
         <NewUserDialog close={onClose} open={addingNewUser}/>

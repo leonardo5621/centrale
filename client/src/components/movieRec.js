@@ -15,38 +15,20 @@ import axios from 'axios';
 import {useSelector, useDispatch} from 'react-redux';
 import Footer from './Footer';
 
-// Liste de films
-
-export default function MoviesList() {
+export default function MovieRec({match}) {
     const [cards, setCards] = useState([]);
     const classes = homeStyle();
     const dispatcher = useDispatch();
     const state = useSelector(state => state);
-    let connectButton;
 
-    if(state.user.name == 'none'){
-        connectButton=(
-          <LinkR to="/connection">
-                    <Button variant="contained" color="primary">
-                      Connectez-vous
-                    </Button>
-    
-          </LinkR>
-        );
-    } else{
-      connectButton = (
-        <LinkR to={state.user.uuid}>
-                    <Button variant="contained" color="primary">
-                      Decouvrez ce que nous pouvons vous recommander!
-                    </Button>
-    
-          </LinkR>
-      );
-    }
 
     //Changement d'état, fonction qui récupère des données des films
     useEffect(() => {
     const getMovies = async () => {
+
+        // URL Des films recommandes
+        //const userUUID = match.params.userID 
+
       axios.get('https://cors-anywhere.herokuapp.com/q25rjhfzij.execute-api.eu-west-1.amazonaws.com/dev/getMovies')
         .then((response) => {
           console.log(response.data);
@@ -80,11 +62,6 @@ export default function MoviesList() {
               
               <div className={classes.heroButtons}>
                 <Grid container spacing={2} justify="center">
-                  <Grid item>
-    
-                    {connectButton}
-                    
-                  </Grid>
                   
                 </Grid>
               </div>
@@ -137,17 +114,6 @@ export default function MoviesList() {
             </Grid>
           </Container>
 
-          <Grid container alignItems="center" justify="center">
-              <div style={{paddingBottom:'3%'}}>
-                  <LinkR to="/movieCreate">
-                    <Button
-                    variant ="contained" color="secondary">
-                    Ajouter un Film
-                    </Button>
-                  </LinkR>
-              </div>
-                   
-          </Grid>
         </main>
     
         {/* Footer */}

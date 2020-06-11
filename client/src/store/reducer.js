@@ -1,5 +1,5 @@
 const initialState = {
-    prenom:'none',
+    user:{prenom:'none',uuid:''},
     movie: {
         name: 'Filme',
         year: "2020",
@@ -15,7 +15,7 @@ const reducer = (state=initialState, action) => {
         case 'LOGIN':
             return {
                 ...state,
-                prenom:action.prenom}
+                user: action.user}
         case 'MOVIE':
             return {
                 ...state,

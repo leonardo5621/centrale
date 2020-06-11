@@ -6,23 +6,13 @@ import SignIn from "./components/Connection";
 import MoviesList from './components/moviesList';
 import MovieDisplay from './containers/MovieDisplay';
 import MovieCreate from './containers/MovieCreate';
+import MovieRec from './components/movieRec'
 
 function App() {
   return (
     <Router>
       <div>
-        {/* <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/demo">API Fetch demo</Link>
-            </li>
-          </ul>
-        </nav> */}
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
+       
         <Switch>
           <Route  path="/demo">
             <PokemonDisplayer />
@@ -33,13 +23,14 @@ function App() {
           <Route path="/connection">
             <SignIn />
           </Route>
-          <Route exact path="/movieList">
+          <Route exact path="/movies/movieList">
               <MoviesList />
           </Route>
-          <Route exact path="/movieDetail">
-            <MovieDisplay />
-          </Route>
-          <Route exact path="/movieCreate">
+          <Route path="/movies/movieList/:userID" composant={MovieRec} />
+
+          <Route path="/movies/:movieID" component={MovieDisplay} />
+
+          <Route exact path="/movies/movieCreate">
             <MovieCreate />
           </Route>
         </Switch>

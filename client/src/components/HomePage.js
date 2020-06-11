@@ -59,7 +59,7 @@ const HomePage = () => {
       <div className={classes.heroContent}>
         <Container maxWidth="sm">
           <Typography component="h2" variant="h3" align="center" color="textPrimary" gutterBottom>
-            Plateforme de Recommandation des Films
+           LME: Recommandation des Films
           </Typography>
           <Typography variant="h5" align="center" color="textSecondary" paragraph>
             Projet d'une plateforme de recommandation des films,développé pour l'enseignement
@@ -85,7 +85,7 @@ const HomePage = () => {
 
                 {/*Lien vers le catalogue des films */}
 
-                <LinkR to="/movieList">
+                <LinkR to="movies/movieList">
                 <Button variant="outlined" color="primary">
                   Découvrez le catalogue
                 </Button>  
