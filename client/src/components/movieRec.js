@@ -15,7 +15,7 @@ import axios from 'axios';
 import {useSelector, useDispatch} from 'react-redux';
 import Footer from './Footer';
 
-export default function MovieRec({match}) {
+const MovieRec = () => {
     const [cards, setCards] = useState([]);
     const classes = homeStyle();
     const dispatcher = useDispatch();
@@ -67,7 +67,7 @@ export default function MovieRec({match}) {
               </div>
             </Container>
           </div>
-          <Container className={classes.cardGrid} maxWidth="md">
+          {/* <Container className={classes.cardGrid} maxWidth="md">
             <Grid container spacing={4}>
               {cards.map((card) => (
                 <Grid item key={card} xs={12} sm={6} md={4}>
@@ -112,7 +112,7 @@ export default function MovieRec({match}) {
                 </Grid>
               ))}
             </Grid>
-          </Container>
+          </Container> */}
 
         </main>
     
@@ -122,3 +122,5 @@ export default function MovieRec({match}) {
         </React.Fragment>
     )
 }
+
+export default MovieRec;

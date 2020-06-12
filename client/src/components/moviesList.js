@@ -92,7 +92,7 @@ export default function MoviesList() {
         );
     } else{
       connectButton = (
-        <LinkR to={state.user.uuid}>
+        <LinkR to={`movieList/${state.user.uuid}`}>
                     <Button variant="contained" color="primary">
                       Decouvrez ce que nous pouvons vous recommander!
                     </Button>
@@ -180,6 +180,7 @@ export default function MoviesList() {
               ))}
             </Grid>
           </Container>
+<<<<<<< HEAD
           {!noMore && (uuids.length>0) && <div style={{display:'flex', justifyContent:'center'}}>
             <Button onClick={goToNextPage} color="default" variant="contained">Page suivante</Button>
           </div>}
@@ -187,6 +188,17 @@ export default function MoviesList() {
             (uuids.length>1) && (
               <div style={{display:'flex', justifyContent:'center'}}>
                 <Button onClick={goToBackPage} color="default" variant="contained">Page précedente</Button>
+=======
+
+          <Grid container alignItems="center" justify="center">
+              <div style={{paddingBottom:'3%'}}>
+                  <LinkR to="/movies/movieCreate">
+                    <Button
+                    variant ="contained" color="secondary">
+                    Ajouter un Film
+                    </Button>
+                  </LinkR>
+>>>>>>> c9971b1e446c2d2784f7c4058a8439533dc991ae
               </div>
             )
           }
