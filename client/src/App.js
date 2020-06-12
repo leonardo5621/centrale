@@ -23,13 +23,9 @@ function App() {
           <Route exact path="/connection">
             <SignIn />
           </Route>
-          <Route exact path="/movies/movieCreate">
-            <MovieCreate />
-          </Route>
           <Route exact path="/movies/movieList">
               <MoviesList />
           </Route>
-<<<<<<< HEAD
           <Route exact path="/movies/movieList/:userID" composant={MovieRec} />
           <Route exact path="/movies/movieCreate">
             <MovieCreate />
@@ -39,12 +35,6 @@ function App() {
             <HomePage />
           </Route>
          
-=======
-          <Route path="/movies/movieList/:userID" composant={MovieRec} />
-
-          <Route path="/movies/:movieID" component={MovieDisplay} />
-
->>>>>>> c9971b1e446c2d2784f7c4058a8439533dc991ae
         </Switch>
       </div>
     </Router>
