@@ -15,6 +15,8 @@ export default function MovieDisplay({match}) {
     const [openRateCard, setRateCard] = useState(false);
     const [state, setState] = useState({}); 
     const classes = homeStyle();
+    const globalState = useSelector(state => state);
+    //const [rate,setRate] = useState(0);
     let rateCard;
 
     useEffect(() => {
@@ -43,11 +45,28 @@ export default function MovieDisplay({match}) {
             setRateCard(!openRateCard);
     }
 
+    const sendRate = async (givenRate) => {
+        let rateObject = {rate: givenRate,
+                            userId: globalState.user.uuid,
+                            movieId: match.params.movieID};
+        axios.post('https://cors-anywhere.herokuapp.com/q25rjhfzij.execute-api.eu-west-1.amazonaws.com/dev/addRating', rateObject)
+        .then((response) => {
+            console.log(response);
+        }).catch(function (error) {
+            if (error.response) {
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+            }
+          });
+    }
+
+
     if(openRateCard){
         rateCard = (
             <Grid container spacing={4} alignItems="center" justify="center">
                 <MovieCard Title={state.name} Poster={state.picture} Realizer={state.realizer} />
-                <MovieRate Title={state.name} Rated={false}/>
+                <MovieRate Title={state.name} Rated={false} SendRate={sendRate}/>
 
             </Grid>
             

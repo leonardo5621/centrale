@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function OutlinedCard(props) {
+export default function MovieRate(props) {
   const [rating, setRating] = useState(0);
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
@@ -33,12 +33,20 @@ export default function OutlinedCard(props) {
     let eventValue = event.target.value;
     setRating(eventValue);
   }
+  let avisFeedback="";
 
   let rated;
+
+
   if (props.Rated){
       rated = ""; 
   } else{
       rated = "Vous n'avez pas encore noté ce film";
+  }
+
+  const donnerAvis = () => {
+	  props.SendRate(rating);
+	  avisFeedback="Votre avis a été pris en compte";
   }
 
   return (
@@ -55,7 +63,8 @@ export default function OutlinedCard(props) {
         </Typography>
         <Typography variant="body2" component="p">
           Note Moyenne: 4.5/5.0. <br/>
-          Parmi {30} notes
+          Parmi {30} notes . <br />
+		  {avisFeedback}
         </Typography>
         <Rating readOnly name="read-rate" value={4.5} precision={0.5}/>
 
@@ -65,7 +74,7 @@ export default function OutlinedCard(props) {
         <Rating precision={0.5} name="rate" value={rating} onChange={rateHandler}/>
       </CardContent>
       <CardActions>
-        <Button size="small">Noter</Button>
+        <Button size="small" onClick={() => donnerAvis()}>Noter</Button>
       </CardActions>
     </Card>
   );
