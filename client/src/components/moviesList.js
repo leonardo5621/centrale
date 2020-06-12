@@ -35,7 +35,7 @@ export default function MoviesList() {
         );
     } else{
       connectButton = (
-        <LinkR to={state.user.uuid}>
+        <LinkR to={`movieList/${state.user.uuid}`}>
                     <Button variant="contained" color="primary">
                       Decouvrez ce que nous pouvons vous recommander!
                     </Button>
@@ -139,7 +139,7 @@ export default function MoviesList() {
 
           <Grid container alignItems="center" justify="center">
               <div style={{paddingBottom:'3%'}}>
-                  <LinkR to="/movieCreate">
+                  <LinkR to="/movies/movieCreate">
                     <Button
                     variant ="contained" color="secondary">
                     Ajouter un Film

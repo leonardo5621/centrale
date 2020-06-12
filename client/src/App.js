@@ -20,8 +20,11 @@ function App() {
           <Route exact path="/">
             <HomePage />
           </Route>
-          <Route path="/connection">
+          <Route exact path="/connection">
             <SignIn />
+          </Route>
+          <Route exact path="/movies/movieCreate">
+            <MovieCreate />
           </Route>
           <Route exact path="/movies/movieList">
               <MoviesList />
@@ -30,9 +33,6 @@ function App() {
 
           <Route path="/movies/:movieID" component={MovieDisplay} />
 
-          <Route exact path="/movies/movieCreate">
-            <MovieCreate />
-          </Route>
         </Switch>
       </div>
     </Router>

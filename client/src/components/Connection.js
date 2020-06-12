@@ -46,7 +46,9 @@ export default function SignIn() {
         var i = 0 ;
         while (i < users.length && !isAlreadyUsed) {
           console.log('users[i]',users[i])
-          isAlreadyUsed =(users[i].name.toLowerCase() == username.toLowerCase()) ; 
+          if(typeof users[i].name === 'string'){
+            isAlreadyUsed = (users[i].name.toLowerCase() === username.toLowerCase()); 
+          }
           i++ ; 
         }
         
