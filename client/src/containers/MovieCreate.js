@@ -77,7 +77,7 @@ function MovieCreate() {
               required
               value={movie.acteurs}
               fullWidth
-              id="length" label="Acteurs(séparez avec des virgules)" name="acteurs"
+              id="length" label="Acteurs(séparez avec des virgules)" name="actors"
               autoFocus onChange={changeHandler}
             ></TextField>
 

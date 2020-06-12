@@ -79,6 +79,16 @@ functions:
             origin: "*"
             allowCredentials: true
 
+  addRating:
+    handler: functions/addRating.handle
+    events:
+      - http:
+          method: post
+          path: addRating
+          cors: 
+            origin: "*"
+            allowCredentials: true
+
 
   addUser:
     handler: functions/addUser.handle
@@ -117,7 +127,7 @@ functions:
           path: movies/{lastElementUuid}
           method: get
           cors:
-            origin: "*"
+            origin: "http://localhost:3000"
             allowCredentials: true
       
   movies:
@@ -136,6 +146,16 @@ functions:
       - http:
           method: get
           path: moviedetails/{id}
+          cors:
+            origin: "*"
+            allowCredentials: true
+  
+  getRatings:
+    handler: functions/getRatings.handle
+    events:
+      - http:
+          path: getRatings
+          method: get
           cors:
             origin: "*"
             allowCredentials: true

@@ -1,0 +1,34 @@
+[
+    {
+        "type" : "Movie",
+        "uuid" : "1",
+        "ratings" :  [
+            {
+                "userID" : "123",
+                "rate" : "4"
+            },
+            {
+                "userID" : "456",
+                "rate" : "5",
+                "predicted" : true
+            }
+
+        ]
+    },
+    {
+        "type" : "Movie",
+        "uuid" : "2",
+        "ratings" :  [
+            {
+                "userID" : "213",
+                "rate" : "3"
+            },
+            {
+                "userID" : "211",
+                "rate" : "2",
+                "predicted" : true
+            }
+
+        ]
+    }
+]

@@ -45,7 +45,7 @@ export default function MovieDisplay({match}) {
         rateCard = (
             <Grid container spacing={4} alignItems="center" justify="center">
                 <MovieCard data={state} Title={state.name} Poster={state.picture} Realizer={state.realizer} />
-                <MovieRate Title={state.name} Rated={false}/>
+                <MovieRate uuid={state.uuid} Title={state.name} Rated={false}/>
 
             </Grid>
             

@@ -26,19 +26,16 @@ export default function MovieCard(props) {
                         {props.Title}
                       </Typography>
                       <Typography>
-                       Réalisateur: {props.data.realizer}
+                      <span style={{fontWeight:'bold'}}>Réalisateur:</span> {props.data.realizer}
                       </Typography>
                       <Typography>
-                       Année: {props.data.year}
+                      <span style={{fontWeight:'bold'}}>Année:</span> {props.data.year}
                       </Typography>
                       <Typography>
-                       Acteurs: {props.data.actors && props.data.actors.join(',')}
+                      <span style={{fontWeight:'bold'}}>Acteurs:</span> {props.data.actors && props.data.actors.join(',')}
                       </Typography>
                       <Typography>
-                       Réalisateur: {props.data.realizer}
-                      </Typography>
-                      <Typography>
-                       Description: {props.data.description}
+                      <span style={{fontWeight:'bold'}}>Description:</span> {props.data.description}
                       </Typography>
                     </CardContent>
                     <CardActions>

@@ -6,6 +6,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Rating from '@material-ui/lab/Rating';
+import axios from 'axios';
+import {useSelector, useDispatch} from 'react-redux';
 
 const useStyles = makeStyles({
   root: {
@@ -32,6 +34,18 @@ export default function OutlinedCard(props) {
   const rateHandler = (event) => {
     let eventValue = event.target.value;
     setRating(eventValue);
+  }
+  const profile = useSelector(state => state);
+
+  const sendRate = () => {
+    const {uuid} = props ;
+    axios.post('https://q25rjhfzij.execute-api.eu-west-1.amazonaws.com/dev/addRating',{
+      rate : rating,
+      movieId : uuid,
+      userId : profile.user.name
+    })
+    console.log('profile.prenom',profile)
+    alert('Note ajoutée')
   }
 
   let rated;
@@ -65,7 +79,7 @@ export default function OutlinedCard(props) {
         <Rating precision={0.5} name="rate" value={rating} onChange={rateHandler}/>
       </CardContent>
       <CardActions>
-        <Button size="small">Noter</Button>
+        <Button disabled={!profile.user || !profile.user.name} onClick={sendRate} size="small">Noter</Button>
       </CardActions>
     </Card>
   );

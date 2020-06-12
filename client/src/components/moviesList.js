@@ -18,13 +18,70 @@ import Footer from './Footer';
 // Liste de films
 
 export default function MoviesList() {
-    const [cards, setCards] = useState([]);
-    const classes = homeStyle();
+  const [cards, setCards] = useState([]);
+  const [uuids, setUuids] = useState([]);
+  const [noMore, setNoMore] = useState(false);
+  const classes = homeStyle();
     const dispatcher = useDispatch();
     const state = useSelector(state => state);
     let connectButton;
 
-    if(state.user.name == 'none'){
+    const goToNextPage = ()=> {
+        axios.get('https://cors-anywhere.herokuapp.com/q25rjhfzij.execute-api.eu-west-1.amazonaws.com/dev/movies/'+uuids[uuids.length-1])
+          .then((response) => {
+            console.log(response.data);
+            setCards(response.data.movies.length ? response.data.movies : cards);
+            if(response.data.lastElementUuid){
+              setUuids([...uuids,response.data.lastElementUuid])
+              setNoMore(false)
+            }
+            else{
+              setNoMore(true)
+            }
+            window.scrollTo(0, 0)
+          })
+          .catch(function (error) {
+            if (error.response) {
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+            }
+          });      
+    }
+    const goToBackPage = ()=> {
+      var url = "" ; 
+      if((uuids.length>2) || (noMore &&  (uuids.length>1)) ){
+        url = 'https://cors-anywhere.herokuapp.com/q25rjhfzij.execute-api.eu-west-1.amazonaws.com/dev/movies/'+uuids[uuids.length-2] ;
+      }
+      else {
+        url = 'https://cors-anywhere.herokuapp.com/q25rjhfzij.execute-api.eu-west-1.amazonaws.com/dev/movies' ;
+      } ;
+      console.log('url',url)
+        setUuids([...uuids.slice(0,uuids.length-1)]) ;
+
+      axios.get(url)
+        .then((response) => {
+          console.log(response.data);
+          setCards(response.data.movies.length ? response.data.movies : cards);
+          if(response.data.lastElementUuid){
+            setUuids([...uuids,response.data.lastElementUuid])
+            setNoMore(false)
+          }
+          else{
+            setNoMore(true)
+          }
+          window.scrollTo(0, 0)
+        })
+        .catch(function (error) {
+          if (error.response) {
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+          }
+        });      
+  }
+
+    if(state.user && (state.user.name == 'none')){
         connectButton=(
           <LinkR to="/connection">
                     <Button variant="contained" color="primary">
@@ -47,10 +104,11 @@ export default function MoviesList() {
     //Changement d'état, fonction qui récupère des données des films
     useEffect(() => {
     const getMovies = async () => {
-      axios.get('https://cors-anywhere.herokuapp.com/q25rjhfzij.execute-api.eu-west-1.amazonaws.com/dev/getMovies')
+      axios.get('https://cors-anywhere.herokuapp.com/q25rjhfzij.execute-api.eu-west-1.amazonaws.com/dev/movies')
         .then((response) => {
           console.log(response.data);
-          setCards(response.data);
+          setCards(response.data.movies);
+          setUuids([response.data.lastElementUuid])
         })
         .catch(function (error) {
           if (error.response) {
@@ -122,6 +180,16 @@ export default function MoviesList() {
               ))}
             </Grid>
           </Container>
+          {!noMore && (uuids.length>0) && <div style={{display:'flex', justifyContent:'center'}}>
+            <Button onClick={goToNextPage} color="default" variant="contained">Page suivante</Button>
+          </div>}
+          {
+            (uuids.length>1) && (
+              <div style={{display:'flex', justifyContent:'center'}}>
+                <Button onClick={goToBackPage} color="default" variant="contained">Page précedente</Button>
+              </div>
+            )
+          }
         </main>
     
         {/* Footer */}
